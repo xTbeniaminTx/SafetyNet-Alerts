@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import fr.tolan.safetynetalerts.models.Person;
-import fr.tolan.safetynetalerts.integration.PersonService;
+import fr.tolan.safetynetalerts.services.PersonService;
 
 @SpringBootTest
 @AutoConfigureTestDatabase

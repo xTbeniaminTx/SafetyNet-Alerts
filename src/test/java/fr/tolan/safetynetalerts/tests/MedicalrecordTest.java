@@ -9,7 +9,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import fr.tolan.safetynetalerts.models.Medicalrecord;
-import fr.tolan.safetynetalerts.integration.MedicalrecordService;
+import fr.tolan.safetynetalerts.services.MedicalrecordService;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;

@@ -1,7 +1,7 @@
 package fr.tolan.safetynetalerts.controllers;
 
 import fr.tolan.safetynetalerts.models.Person;
-import fr.tolan.safetynetalerts.integration.PersonService;
+import fr.tolan.safetynetalerts.services.PersonService;
 import javax.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

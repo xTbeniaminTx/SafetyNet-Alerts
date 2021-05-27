@@ -1,4 +1,4 @@
-package fr.tolan.safetynetalerts.integration;
+package fr.tolan.safetynetalerts.services;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

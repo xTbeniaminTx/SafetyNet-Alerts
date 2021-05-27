@@ -1,7 +1,7 @@
 package fr.tolan.safetynetalerts.controllers;
 
 import fr.tolan.safetynetalerts.dtos.PersonInfoDto;
-import fr.tolan.safetynetalerts.integration.PersonInfoService;
+import fr.tolan.safetynetalerts.services.PersonInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

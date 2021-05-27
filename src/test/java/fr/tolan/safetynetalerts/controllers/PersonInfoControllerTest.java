@@ -5,7 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import fr.tolan.safetynetalerts.dtos.PersonInfoDto;
-import fr.tolan.safetynetalerts.integration.PersonInfoService;
+import fr.tolan.safetynetalerts.services.PersonInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
