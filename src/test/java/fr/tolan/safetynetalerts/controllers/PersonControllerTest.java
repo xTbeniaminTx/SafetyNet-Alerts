@@ -1,8 +1,12 @@
 package fr.tolan.safetynetalerts.controllers;
 
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import fr.tolan.safetynetalerts.models.Person;
 import fr.tolan.safetynetalerts.services.PersonService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +31,22 @@ public class PersonControllerTest {
 				.andExpect(status().isOk());
 	}
 
-//	@Test
-//	public void updatePersonTest() throws Exception {
-//		Person p = new Person("CreatedFirstName", "CreatedLastName", "1509 Culver St", "Culver", "97451",
-//				"841-874-6512", "jaboyd@email.com");
-//		when(personService.getPerson("CreatedFirstName", "CreatedLastName")).thenReturn(p);
-//		mockMvc.perform(put("/person/CreatedFirstName CreatedLastName").contentType(MediaType.APPLICATION_JSON).content(
-//				"{ \"address\":\"UpdatedAddress\", \"city\":\"Culver\", \"zip\":\"97451\", \"phone\":\"841-874-6512\", \"email\":\"jaboyd@email.com\" }"))
-//				.andExpect(status().isOk());
-//	}
-//
-//	@Test
-//	public void deletePersonTest() throws Exception {
-//		Person p = new Person("CreatedFirstName", "CreatedLastName", "1509 Culver St", "Culver", "97451",
-//				"841-874-6512", "jaboyd@email.com");
-//		when(personService.getPerson("CreatedFirstName", "CreatedLastName")).thenReturn(p);
-//		mockMvc.perform(delete("/person/CreatedFirstName CreatedLastName")).andExpect(status().isOk());
-//	}
+	@Test
+	public void updatePersonTest() throws Exception {
+		Person p = new Person("CreatedFirstName", "CreatedLastName", "1509 Culver St", "Culver", "97451",
+				"841-874-6512", "jaboyd@email.com");
+		when(personService.getPerson("CreatedFirstName", "CreatedLastName")).thenReturn(p);
+		mockMvc.perform(put("/person/CreatedFirstName CreatedLastName").contentType(MediaType.APPLICATION_JSON).content(
+				"{ \"address\":\"UpdatedAddress\", \"city\":\"Culver\", \"zip\":\"97451\", \"phone\":\"841-874-6512\", \"email\":\"jaboyd@email.com\" }"))
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	public void deletePersonTest() throws Exception {
+		Person p = new Person("CreatedFirstName", "CreatedLastName", "1509 Culver St", "Culver", "97451",
+				"841-874-6512", "jaboyd@email.com");
+		when(personService.getPerson("CreatedFirstName", "CreatedLastName")).thenReturn(p);
+		mockMvc.perform(delete("/person/CreatedFirstName CreatedLastName")).andExpect(status().isOk());
+	}
 
 }
