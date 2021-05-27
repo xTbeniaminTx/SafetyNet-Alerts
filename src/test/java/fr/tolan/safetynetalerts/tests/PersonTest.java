@@ -52,32 +52,14 @@ public class PersonTest {
         .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").exists());
   }
 
-//  @Test
-//  @Order(2)
-//  public void createPersonConstraintViolationTest() throws Exception {
-//    mockMvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON).content(
-//        "{ \"lastName\":\"CreatedLastName\", \"address\":\"1509 Culver St\", \"city\":\"Culver\", \"zip\":\"97451\", \"phone\":\"841-874-6512\", \"email\":\"jaboyd@email.com\" }")
-//        ).andExpect(model().hasErrors())
-//        .andExpect(status().isInternalServerError());
-//  }
-
-//  @Test
-//  @Order(2)
-//  public void createPersonConstraintViolationTest() throws Exception {
-//    mockMvc.perform(MockMvcRequestBuilders.post("/person").contentType(MediaType.APPLICATION_JSON)
-//        .content(
-//            "{ \"firstName\":\"CreatedFirstName\", \"lastName\":\"CreatedLastName\", \"address\":\"1509 Culver St\", \"city\":\"Culver\", \"zip\":\"97451\", \"phone\":\"841-874-6512\", \"email\":\"jaboyd@email.com\" }")
-//        .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isConflict());
-//  }
-
   @Test
-  @Order(3)
+  @Order(2)
   void getPersonsTestIT() throws Exception {
     mockMvc.perform(get("/persons")).andExpect(status().isOk());
   }
 
   @Test
-  @Order(4)
+  @Order(3)
   @Rollback(false)
   public void updatePersonTest() throws Exception {
     mockMvc.perform(
@@ -89,7 +71,7 @@ public class PersonTest {
   }
 
   @Test
-  @Order(5)
+  @Order(4)
   @Rollback(false)
   public void updatePersonNotFoundTest() throws Exception {
     mockMvc.perform(put("/person/NotCreatedFirstName NotCreatedLastName")
@@ -101,7 +83,7 @@ public class PersonTest {
   }
 
   @Test
-  @Order(7)
+  @Order(5)
   @Rollback(false)
   public void deletePersonTest() throws Exception {
     mockMvc.perform(delete("/person/CreatedFirstName CreatedLastName")).andExpect(status().isOk());
@@ -115,10 +97,10 @@ public class PersonTest {
   @Rollback(false)
   public void deletePersonNotFoundTest() throws Exception {
     mockMvc.perform(
-        delete("/person/NotCreatedFirstName NotCreatedLastName").accept(MediaType.APPLICATION_JSON))
+        delete("/person/CreatedFirstName CreatedLastName").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isNotFound());
     Person deletedPerson = personService.getPerson("CreatedFirstName", "CreatedLastName");
-    assertThat(deletedPerson).isNotNull();
+    assertThat(deletedPerson).isNull();
   }
 
 }
