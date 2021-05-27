@@ -30,26 +30,26 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @AutoConfigureMockMvc
 public class MedicalrecordTest {
 
-	@Autowired
-	private MockMvc mockMvc;
+  @Autowired
+  private MockMvc mockMvc;
 
-	@Autowired
-	private MedicalrecordService medicalrecordService;
+  @Autowired
+  private MedicalrecordService medicalrecordService;
 
-	@AfterAll
-	private static void tearDown() {
+  @AfterAll
+  private static void tearDown() {
 
-	}
+  }
 
-	@Test
-	@Order(1)
-	@Rollback(false)
-	public void createMedicalrecordTest() throws Exception {
-		mockMvc.perform(post("/medicalrecord").contentType(MediaType.APPLICATION_JSON).content(
-				"{ \"firstName\":\"CreatedFirstName\", \"lastName\":\"CreatedLastName\", \"birthdate\":\"03/06/1984\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }")
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.firstName").exists());
-	}
+  @Test
+  @Order(1)
+  @Rollback(false)
+  public void createMedicalrecordTest() throws Exception {
+    mockMvc.perform(post("/medicalrecord").contentType(MediaType.APPLICATION_JSON).content(
+        "{ \"firstName\":\"CreatedFirstName\", \"lastName\":\"CreatedLastName\", \"birthdate\":\"03/06/1984\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }")
+        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").exists());
+  }
 
 //	@Test
 //	@Order(2)
@@ -60,55 +60,58 @@ public class MedicalrecordTest {
 //				.andExpect(MockMvcResultMatchers.jsonPath("$.firstName").doesNotExist());
 //	}
 
-	@Test
-	@Order(3)
-	void getMedicalrecordsTestIT() throws Exception {
-		mockMvc.perform(get("/medicalrecords")).andExpect(status().isOk());
-	}
+  @Test
+  @Order(3)
+  void getMedicalrecordsTestIT() throws Exception {
+    mockMvc.perform(get("/medicalrecords")).andExpect(status().isOk());
+  }
 
-	@Test
-	@Order(4)
-	@Rollback(false)
-	public void updateMedicalrecordTest() throws Exception {
-		mockMvc.perform(put("/medicalrecord/CreatedFirstName CreatedLastName").contentType(MediaType.APPLICATION_JSON)
-				.content(
-						"{ \"birthdate\":\"01/01/1901\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }")
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.birthdate", is("1901-01-01")));
-	}
+  @Test
+  @Order(4)
+  @Rollback(false)
+  public void updateMedicalrecordTest() throws Exception {
+    mockMvc.perform(put("/medicalrecord/CreatedFirstName CreatedLastName")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(
+            "{ \"birthdate\":\"01/01/1901\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }")
+        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.birthdate", is("1901-01-01")));
+  }
 
-	@Test
-	@Order(5)
-	@Rollback(false)
-	public void updateMedicalrecordNotFoundTest() throws Exception {
-		mockMvc.perform(put("/medicalrecord/NotCreatedFirstName NotCreatedLastName")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(
-						"{ \"birthdate\":\"03/06/1984\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }")
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
-	}
+  @Test
+  @Order(5)
+  @Rollback(false)
+  public void updateMedicalrecordNotFoundTest() throws Exception {
+    mockMvc.perform(put("/medicalrecord/NotCreatedFirstName NotCreatedLastName")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(
+            "{ \"birthdate\":\"03/06/1984\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }")
+        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+  }
 
-	@Test
-	@Order(7)
-	@Rollback(false)
-	public void deleteMedicalrecordTest() throws Exception {
-		mockMvc.perform(delete("/medicalrecord/CreatedFirstName CreatedLastName")).andExpect(status().isOk());
-		Medicalrecord deletedMedicalrecord = medicalrecordService.getMedicalrecord("CreatedFirstName",
-				"CreatedLastName");
-		assertThat(deletedMedicalrecord).isNull();
+  @Test
+  @Order(7)
+  @Rollback(false)
+  public void deleteMedicalrecordTest() throws Exception {
+    mockMvc.perform(delete("/medicalrecord/CreatedFirstName CreatedLastName"))
+        .andExpect(status().isOk());
+    Medicalrecord deletedMedicalrecord = medicalrecordService.getMedicalrecord("CreatedFirstName",
+        "CreatedLastName");
+    assertThat(deletedMedicalrecord).isNull();
 
-	}
+  }
 
-	@Test
-	@Order(6)
-	@Rollback(false)
-	public void deleteMedicalrecordNotFoundTest() throws Exception {
-		mockMvc.perform(
-				delete("/medicalrecord/NotCreatedFirstName NotCreatedLastName").accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isNotFound());
-		Medicalrecord deletedMedicalrecord = medicalrecordService.getMedicalrecord("CreatedFirstName",
-				"CreatedLastName");
-		assertThat(deletedMedicalrecord).isNotNull();
-	}
+  @Test
+  @Order(6)
+  @Rollback(false)
+  public void deleteMedicalrecordNotFoundTest() throws Exception {
+    mockMvc.perform(
+        delete("/medicalrecord/NotCreatedFirstName NotCreatedLastName")
+            .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isNotFound());
+    Medicalrecord deletedMedicalrecord = medicalrecordService.getMedicalrecord("CreatedFirstName",
+        "CreatedLastName");
+    assertThat(deletedMedicalrecord).isNotNull();
+  }
 
 }

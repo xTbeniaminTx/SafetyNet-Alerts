@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Integer> {
 
-	Person findByFirstNameAndLastName(String firstName, String lastName);
+  Person findByFirstNameAndLastName(String firstName, String lastName);
 
-	@Transactional
-	void deleteByFirstNameAndLastName(String firstName, String lastName);
+  @Transactional
+  void deleteByFirstNameAndLastName(String firstName, String lastName);
 
 }

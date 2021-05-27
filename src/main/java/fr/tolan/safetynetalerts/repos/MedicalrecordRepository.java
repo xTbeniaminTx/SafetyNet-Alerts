@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface MedicalrecordRepository extends CrudRepository<Medicalrecord, Integer> {
 
-	Medicalrecord findByFirstNameAndLastName(String firstName, String lastName);
+  Medicalrecord findByFirstNameAndLastName(String firstName, String lastName);
 
-	@Transactional
-	void deleteByFirstNameAndLastName(String firstName, String lastName);
+  @Transactional
+  void deleteByFirstNameAndLastName(String firstName, String lastName);
 
 }

@@ -18,35 +18,39 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(controllers = MedicalrecordController.class)
 public class MedicalrecordControllerTest {
 
-	@Autowired
-	private MockMvc mockMvc;
+  @Autowired
+  private MockMvc mockMvc;
 
-	@MockBean
-	private MedicalrecordService medicalrecordService;
+  @MockBean
+  private MedicalrecordService medicalrecordService;
 
-	@Test
-	public void createMedicalrecordTest() throws Exception {
-		mockMvc.perform(post("/medicalrecord").contentType(MediaType.APPLICATION_JSON).content(
-				"{ \"firstName\":\"John\", \"lastName\":\"Boyd\", \"birthdate\":\"03/06/1984\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }"))
-				.andExpect(status().isOk());
-	}
+  @Test
+  public void createMedicalrecordTest() throws Exception {
+    mockMvc.perform(post("/medicalrecord").contentType(MediaType.APPLICATION_JSON).content(
+        "{ \"firstName\":\"John\", \"lastName\":\"Boyd\", \"birthdate\":\"03/06/1984\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }"))
+        .andExpect(status().isOk());
+  }
 
-	@Test
-	public void updateMedicalrecordTest() throws Exception {
-		Medicalrecord p = new Medicalrecord();
+  @Test
+  public void updateMedicalrecordTest() throws Exception {
+    Medicalrecord p = new Medicalrecord();
 
-		when(medicalrecordService.getMedicalrecord("CreatedFirstName", "CreatedLastName")).thenReturn(p);
-		mockMvc.perform(
-				put("/medicalrecord/CreatedFirstName CreatedLastName").contentType(MediaType.APPLICATION_JSON).content(
-						"{ \"firstName\":\"John\", \"lastName\":\"Boyd\", \"birthdate\":\"03/06/1984\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }"))
-				.andExpect(status().isOk());
-	}
+    when(medicalrecordService.getMedicalrecord("CreatedFirstName", "CreatedLastName"))
+        .thenReturn(p);
+    mockMvc.perform(
+        put("/medicalrecord/CreatedFirstName CreatedLastName")
+            .contentType(MediaType.APPLICATION_JSON).content(
+            "{ \"firstName\":\"John\", \"lastName\":\"Boyd\", \"birthdate\":\"03/06/1984\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }"))
+        .andExpect(status().isOk());
+  }
 
-	@Test
-	public void deleteMedicalrecordTest() throws Exception {
-		Medicalrecord p = new Medicalrecord();
-		when(medicalrecordService.getMedicalrecord("CreatedFirstName", "CreatedLastName")).thenReturn(p);
-		mockMvc.perform(delete("/medicalrecord/CreatedFirstName CreatedLastName")).andExpect(status().isOk());
-	}
+  @Test
+  public void deleteMedicalrecordTest() throws Exception {
+    Medicalrecord p = new Medicalrecord();
+    when(medicalrecordService.getMedicalrecord("CreatedFirstName", "CreatedLastName"))
+        .thenReturn(p);
+    mockMvc.perform(delete("/medicalrecord/CreatedFirstName CreatedLastName"))
+        .andExpect(status().isOk());
+  }
 
 }

@@ -9,18 +9,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonInfoService {
 
-	@Autowired
-	PersonMedicalrecordService personMedicalrecordDtoService;
+  @Autowired
+  PersonMedicalrecordService personMedicalrecordDtoService;
 
-	public PersonInfoDto getPersonInfo(String firstName, String lastName) {
-		PersonMedicalrecordDto personMedicalrecordDto = personMedicalrecordDtoService
-				.getPersonMedicalrecordDto(firstName, lastName);
-		if (personMedicalrecordDto != null) {
-			ModelMapper modelMapper = new ModelMapper();
-			PersonInfoDto personInfoDto = modelMapper.map(personMedicalrecordDto, PersonInfoDto.class);
-			return personInfoDto;
-		} else {
-			return null;
-		}
-	}
+  public PersonInfoDto getPersonInfo(String firstName, String lastName) {
+    PersonMedicalrecordDto personMedicalrecordDto = personMedicalrecordDtoService
+        .getPersonMedicalrecordDto(firstName, lastName);
+    if (personMedicalrecordDto != null) {
+      ModelMapper modelMapper = new ModelMapper();
+      PersonInfoDto personInfoDto = modelMapper.map(personMedicalrecordDto, PersonInfoDto.class);
+      return personInfoDto;
+    } else {
+      return null;
+    }
+  }
 }

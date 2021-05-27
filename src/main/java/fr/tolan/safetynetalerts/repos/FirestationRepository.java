@@ -10,12 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface FirestationRepository extends CrudRepository<Firestation, Integer> {
 
-	Firestation findByAddress(String address);
+  Firestation findByAddress(String address);
 
-	@Transactional
-	Object deleteByAddress(String address);
+  @Transactional
+  Object deleteByAddress(String address);
 
-	@Query("SELECT address FROM Firestation f WHERE station = ?1 ")
-	List<String> findByStation(String station);
+  @Query("SELECT address FROM Firestation f WHERE station = ?1 ")
+  List<String> findByStation(String station);
 
 }
