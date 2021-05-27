@@ -1,4 +1,4 @@
-package fr.tolan.safetynetalerts.services;
+package fr.tolan.safetynetalerts.integration;
 
 import fr.tolan.safetynetalerts.dtos.PersonMedicalrecordDto;
 import fr.tolan.safetynetalerts.models.Medicalrecord;

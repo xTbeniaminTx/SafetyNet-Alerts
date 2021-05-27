@@ -1,7 +1,7 @@
 package fr.tolan.safetynetalerts.controllers;
 
 import fr.tolan.safetynetalerts.models.Medicalrecord;
-import fr.tolan.safetynetalerts.services.MedicalrecordService;
+import fr.tolan.safetynetalerts.integration.MedicalrecordService;
 import java.time.LocalDate;
 import javax.validation.ConstraintViolationException;
 import org.slf4j.Logger;

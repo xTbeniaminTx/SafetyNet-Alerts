@@ -1,7 +1,7 @@
 package fr.tolan.safetynetalerts.controllers;
 
 import fr.tolan.safetynetalerts.models.Firestation;
-import fr.tolan.safetynetalerts.services.FirestationService;
+import fr.tolan.safetynetalerts.integration.FirestationService;
 import javax.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
