@@ -51,15 +51,6 @@ public class MedicalrecordTest {
         .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").exists());
   }
 
-//	@Test
-//	@Order(2)
-//	public void createMedicalrecordConstraintViolationTest() throws Exception {
-//		mockMvc.perform(post("/medicalrecord").contentType(MediaType.APPLICATION_JSON).content(
-//				"{ \"lastName\":\"CreatedLastName\", \"birthdate\":\"03/06/1984\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }")
-//				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest())
-//				.andExpect(MockMvcResultMatchers.jsonPath("$.firstName").doesNotExist());
-//	}
-
   @Test
   @Order(3)
   void getMedicalrecordsTestIT() throws Exception {

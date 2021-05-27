@@ -50,13 +50,6 @@ public class FirestationTest {
         .andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.address").exists());
   }
 
-//	@Test
-//	@Order(2)
-//	public void createFirestationConstraintViolationTest() throws Exception {
-//		mockMvc.perform(post("/firestation").contentType(MediaType.APPLICATION_JSON).content("{ \"station\":\"7\" }")
-//				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest())
-//				.andExpect(MockMvcResultMatchers.jsonPath("$.id").doesNotExist());
-//	}
 
   @Test
   @Order(3)
