@@ -1,4 +1,4 @@
-package fr.tolan.safetynetalerts.initData;
+package fr.tolan.safetynetalerts.initdata;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;

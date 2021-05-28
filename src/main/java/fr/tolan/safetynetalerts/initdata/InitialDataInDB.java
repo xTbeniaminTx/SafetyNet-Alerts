@@ -1,4 +1,4 @@
-package fr.tolan.safetynetalerts.initData;
+package fr.tolan.safetynetalerts.initdata;
 
 import fr.tolan.safetynetalerts.models.Firestation;
 import fr.tolan.safetynetalerts.models.Medicalrecord;
