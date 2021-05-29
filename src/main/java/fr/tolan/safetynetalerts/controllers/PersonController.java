@@ -91,37 +91,38 @@ public class PersonController {
         lastName, person);
 
     Person personInDB = personService.getPerson(firstName, lastName);
-    if (personInDB != null) {
+    if (personInDB == null) {
 
-      String address = person.getAddress();
-      if (address != null) {
-        personInDB.setAddress(address);
-      }
-      String city = person.getCity();
-      if (city != null) {
-        personInDB.setCity(city);
-      }
-      String zip = person.getZip();
-      if (zip != null) {
-        personInDB.setZip(zip);
-      }
-      String phone = person.getPhone();
-      if (phone != null) {
-        personInDB.setPhone(phone);
-      }
-      String email = person.getEmail();
-      if (email != null) {
-        personInDB.setEmail(email);
-      }
-      personService.savePerson(personInDB);
-
-      logger.info("Return : Body : {}", personInDB);
-
-      return ResponseEntity.ok().body(personInDB);
-    } else {
       logger.error("Person {} {} not found in DB", firstName, lastName);
-      return ResponseEntity.notFound().build();
+      throw new PersonNotFoundException(
+          "fistName: " + firstName + " lastName: " + lastName + " not FOUND");
     }
+
+    String address = person.getAddress();
+    if (address != null) {
+      personInDB.setAddress(address);
+    }
+    String city = person.getCity();
+    if (city != null) {
+      personInDB.setCity(city);
+    }
+    String zip = person.getZip();
+    if (zip != null) {
+      personInDB.setZip(zip);
+    }
+    String phone = person.getPhone();
+    if (phone != null) {
+      personInDB.setPhone(phone);
+    }
+    String email = person.getEmail();
+    if (email != null) {
+      personInDB.setEmail(email);
+    }
+    personService.savePerson(personInDB);
+
+    logger.info("Return : Body : {}", personInDB);
+
+    return ResponseEntity.ok().body(personInDB);
   }
 
   /**
