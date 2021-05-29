@@ -28,7 +28,6 @@ public class AddressPersonsStationController {
   /**
    * Read - Get list of persons and station number by address
    *
-   * @param address
    * @return AddressPersonsStationDto
    */
   @RequestMapping(value = "/fire", params = {"address"}, method = RequestMethod.GET)

@@ -11,9 +11,8 @@ public class JsonParser {
   public AllData readJsonWithObjectMapper() throws IOException {
 
     ObjectMapper objectMapper = new ObjectMapper();
-    AllData allData = objectMapper
+    return objectMapper
         .readValue(new File("src/main/resources/data.json"), AllData.class);
-    return allData;
   }
 
 }

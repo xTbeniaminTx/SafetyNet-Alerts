@@ -15,35 +15,37 @@ import org.springframework.stereotype.Service;
 @Service
 public class FloodStationService {
 
-	@Autowired
-	FirestationService firestationService;
+  @Autowired
+  FirestationService firestationService;
 
-	@Autowired
-	PersonMedicalrecordService personMedicalrecordDtoService;
+  @Autowired
+  PersonMedicalrecordService personMedicalrecordDtoService;
 
-	@Autowired
-	AddressPersonsStationService addressPersonsStationService;
+  @Autowired
+  AddressPersonsStationService addressPersonsStationService;
 
-	public List<FloodStationDto> getFloodStation(List<String> stations) {
-		List<FloodStationDto> floodStationList = new ArrayList<FloodStationDto>();
-		for (String station : stations) {
-			List<String> stationAddresses = firestationService.getAddresses(station);
-			List<FloodStationPersonsDto> stationPersonsByAddress = new ArrayList<FloodStationPersonsDto>();
-			for (String address : stationAddresses) {
-				List<PersonMedicalrecordDto> personsByAddress = personMedicalrecordDtoService
-						.getPersonsMedicalrecordByAddress(address);
-				ModelMapper modelMapper = new ModelMapper();
-				Type listType = new TypeToken<List<PersonForAddressPersonsStationDto>>() {
-				}.getType();
-				List<PersonForAddressPersonsStationDto> personsByAddressDto = modelMapper.map(personsByAddress,
-						listType);
-				FloodStationPersonsDto floodStationPersons = new FloodStationPersonsDto(address, personsByAddressDto);
-				stationPersonsByAddress.add(floodStationPersons);
-			}
-			FloodStationDto floodStation = new FloodStationDto(station, stationPersonsByAddress);
-			floodStationList.add(floodStation);
-		}
-		return floodStationList;
-	}
+  public List<FloodStationDto> getFloodStation(List<String> stations) {
+    List<FloodStationDto> floodStationList = new ArrayList<FloodStationDto>();
+    for (String station : stations) {
+      List<String> stationAddresses = firestationService.getAddresses(station);
+      List<FloodStationPersonsDto> stationPersonsByAddress = new ArrayList<FloodStationPersonsDto>();
+      for (String address : stationAddresses) {
+        List<PersonMedicalrecordDto> personsByAddress = personMedicalrecordDtoService
+            .getPersonsMedicalrecordByAddress(address);
+        ModelMapper modelMapper = new ModelMapper();
+        Type listType = new TypeToken<List<PersonForAddressPersonsStationDto>>() {
+        }.getType();
+        List<PersonForAddressPersonsStationDto> personsByAddressDto = modelMapper
+            .map(personsByAddress,
+                listType);
+        FloodStationPersonsDto floodStationPersons = new FloodStationPersonsDto(address,
+            personsByAddressDto);
+        stationPersonsByAddress.add(floodStationPersons);
+      }
+      FloodStationDto floodStation = new FloodStationDto(station, stationPersonsByAddress);
+      floodStationList.add(floodStation);
+    }
+    return floodStationList;
+  }
 
 }

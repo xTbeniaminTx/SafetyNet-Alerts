@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AgeFromBirthdate {
-	public Integer ageFromBirthdate(LocalDate birthdate) {
-		Integer age = Period.between(birthdate, LocalDate.now()).getYears();
-		return age;
-	}
+
+  public Integer ageFromBirthdate(LocalDate birthdate) {
+    return Period.between(birthdate, LocalDate.now()).getYears();
+  }
 }

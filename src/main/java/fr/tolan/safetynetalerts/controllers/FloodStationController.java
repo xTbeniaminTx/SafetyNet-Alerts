@@ -30,8 +30,7 @@ public class FloodStationController {
 
 	/**
 	 * Read - Get list of persons and station number by address
-	 * 
-	 * @param stations
+	 *
 	 * @return AddressPersonsStationDto
 	 */
 	@RequestMapping(value = "/flood/stations", params = { "stations" }, method = RequestMethod.GET)

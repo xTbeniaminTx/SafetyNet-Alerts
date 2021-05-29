@@ -53,15 +53,12 @@ public class MedicalrecordController {
    */
   @GetMapping("/medicalrecords")
   public Iterable<Medicalrecord> getMedicalrecords() {
-    Iterable<Medicalrecord> medicalrecords = medicalrecordService.getMedicalrecords();
-    return medicalrecords;
+    return medicalrecordService.getMedicalrecords();
   }
 
   /**
    * * Update - Update an existing medicalrecord
    *
-   * @param firstName
-   * @param lastName
    * @param medicalrecord - The medicalrecord object to update
    * @return The medicalrecord object updated
    */
@@ -106,8 +103,6 @@ public class MedicalrecordController {
   /**
    * Delete - Delete a medicalrecord
    *
-   * @param firstName
-   * @param lastName
    * @return medicalrecord deleted message
    */
   @DeleteMapping("medicalrecord/{firstName} {lastName}")

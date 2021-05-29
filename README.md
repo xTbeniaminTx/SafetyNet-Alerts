@@ -82,7 +82,7 @@ http://localhost:8080/firestation
 
 http://localhost:8080/medicalRecord
 
-<h3>JSON Body for /medicalRecord</h3>
+<h3>JSON Body for /medicalrecord</h3>
 
 <code>
 { "firstName":"John", "lastName":"Boyd", "birthdate":"03/03/1993", "medications":["aznol:350mg", "hydrapermazol:100mg"], "allergies":["nillacilan"] }</code>

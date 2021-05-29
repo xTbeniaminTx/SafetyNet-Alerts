@@ -33,8 +33,6 @@ public class PersonMedicalrecordService {
   /**
    * Get PersonMedicalrecord from first and last name
    *
-   * @param firstName
-   * @param lastName
    * @return Persons and Medicalrecords Infos
    */
   public PersonMedicalrecordDto getPersonMedicalrecordDto(String firstName, String lastName) {
@@ -54,7 +52,6 @@ public class PersonMedicalrecordService {
   /**
    * Get PersonMedicalrecord from Person
    *
-   * @param person
    * @return Persons and Medicalrecords Infos
    */
   public PersonMedicalrecordDto personToPersonMedDto(Person person) {
@@ -66,7 +63,6 @@ public class PersonMedicalrecordService {
   /**
    * Get PersonMedicalrecord from address
    *
-   * @param address
    * @return Persons and Medicalrecords Infos
    */
   public List<PersonMedicalrecordDto> getPersonsMedicalrecordByAddress(String address) {
@@ -83,7 +79,6 @@ public class PersonMedicalrecordService {
   /**
    * Get PersonMedicalrecord from list of addresses
    *
-   * @param addresses LIst
    * @return Persons and Medicalrecords Infos
    */
   public List<PersonMedicalrecordDto> getPersonsMedicalrecordByAddresses(List<String> addresses) {

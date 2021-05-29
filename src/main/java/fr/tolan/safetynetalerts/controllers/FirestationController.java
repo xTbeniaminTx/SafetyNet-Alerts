@@ -46,7 +46,6 @@ public class FirestationController {
   /**
    * Update - Update station for an
    *
-   * @param
    * @param station to update
    * @return The firestation object updated
    */
@@ -55,17 +54,16 @@ public class FirestationController {
       @PathVariable("address") final String address,
       @RequestBody String station) {
 
-    logger.info("Update request : PUT http://localhost:8080/firestation/{} - Body : {}", station);
+    logger.info("Update request : PUT http://localhost:8080/firestation/{} - Body : {}", station, address);
 
     Firestation firestationInDB = firestationService.getFirestation(address);
     if (firestationInDB != null) {
-      Firestation currentFirestation = firestationInDB;
-      currentFirestation.setStation(station);
-      firestationService.saveFirestation(currentFirestation);
+      firestationInDB.setStation(station);
+      firestationService.saveFirestation(firestationInDB);
 
-      logger.info("Return : Body : {}", currentFirestation);
+      logger.info("Return : Body : {}", firestationInDB);
 
-      return ResponseEntity.ok().body(currentFirestation);
+      return ResponseEntity.ok().body(firestationInDB);
     } else {
       logger.error("Firestation for : {} not found in DB", station);
       return ResponseEntity.notFound().build();
@@ -79,7 +77,7 @@ public class FirestationController {
     Firestation firestationInDB = firestationService.getFirestation(address);
     if (firestationInDB != null) {
       firestationService.deleteFirestation(address);
-      logger.info("Firestation {} {} deleted", address);
+      logger.info("Firestation {} {} deleted",firestationInDB, address);
       return ResponseEntity.ok().body(firestationInDB);
     } else {
       logger.error("Firestation for  {} not found in DB", address);

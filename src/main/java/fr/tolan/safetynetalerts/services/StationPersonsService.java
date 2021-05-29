@@ -39,9 +39,8 @@ public class StationPersonsService {
           adults++;
         }
       }
-      StationPersonsDto stationsPerson = new StationPersonsDto(listPersonsByStationDto, children,
+      return new StationPersonsDto(listPersonsByStationDto, children,
           adults);
-      return stationsPerson;
     } else {
       return null;
     }

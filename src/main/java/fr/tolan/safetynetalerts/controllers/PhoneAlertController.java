@@ -32,7 +32,6 @@ public class PhoneAlertController {
 	 * 
 	 * Read - Get list of phones by stations
 	 * 
-	 * @param stationNumber
 	 * @return Set of phones
 	 */
 	@RequestMapping(value = "/phoneAlert", params = { "firestation" }, method = RequestMethod.GET)

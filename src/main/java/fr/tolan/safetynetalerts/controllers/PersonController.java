@@ -51,15 +51,12 @@ public class PersonController {
    */
   @GetMapping("/persons")
   public Iterable<Person> getPersons() {
-    Iterable<Person> persons = personService.getPersons();
-    return persons;
+    return personService.getPersons();
   }
 
   /**
    * * Update - Update an existing person
    *
-   * @param firstName
-   * @param lastName
    * @param person    - The person object to update
    * @return The person object updated
    */
@@ -72,33 +69,32 @@ public class PersonController {
 
     Person personInDB = personService.getPerson(firstName, lastName);
     if (personInDB != null) {
-      Person currentPerson = personInDB;
 
       String address = person.getAddress();
       if (address != null) {
-        currentPerson.setAddress(address);
+        personInDB.setAddress(address);
       }
       String city = person.getCity();
       if (city != null) {
-        currentPerson.setCity(city);
+        personInDB.setCity(city);
       }
       String zip = person.getZip();
       if (zip != null) {
-        currentPerson.setZip(zip);
+        personInDB.setZip(zip);
       }
       String phone = person.getPhone();
       if (phone != null) {
-        currentPerson.setPhone(phone);
+        personInDB.setPhone(phone);
       }
       String email = person.getEmail();
       if (email != null) {
-        currentPerson.setEmail(email);
+        personInDB.setEmail(email);
       }
-      personService.savePerson(currentPerson);
+      personService.savePerson(personInDB);
 
-      logger.info("Return : Body : {}", currentPerson);
+      logger.info("Return : Body : {}", personInDB);
 
-      return ResponseEntity.ok().body(currentPerson);
+      return ResponseEntity.ok().body(personInDB);
     } else {
       logger.error("Person {} {} not found in DB", firstName, lastName);
       return ResponseEntity.notFound().build();

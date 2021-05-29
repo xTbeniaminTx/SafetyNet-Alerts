@@ -29,8 +29,6 @@ public class PersonInfoController {
   /**
    * Read - Get PersonInfo - Person and Medicalrecord
    *
-   * @param firstName
-   * @param lastName
    * @return person + medicalrecord DTO
    */
   @RequestMapping(value = "/personInfo", params = {"firstName",

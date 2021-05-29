@@ -28,7 +28,6 @@ public class EmailController {
   /**
    * Read - Get list of emails by city
    *
-   * @param city
    * @return Set of emails
    */
   @RequestMapping(value = "/communityEmail", params = {"city"}, method = RequestMethod.GET)

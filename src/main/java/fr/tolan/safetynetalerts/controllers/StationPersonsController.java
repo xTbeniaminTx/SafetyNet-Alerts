@@ -28,7 +28,6 @@ public class StationPersonsController {
   /**
    * Read - Get list of persons, number of children and adults by stations
    *
-   * @param stationNumber
    * @return StationPersonsDto
    */
   @RequestMapping(value = "/firestation", params = {"stationNumber"}, method = RequestMethod.GET)
