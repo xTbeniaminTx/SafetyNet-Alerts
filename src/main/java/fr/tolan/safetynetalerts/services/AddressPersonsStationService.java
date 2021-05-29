@@ -29,10 +29,9 @@ public class AddressPersonsStationService {
       List<PersonForAddressPersonsStationDto> listPersonsByStationDto = modelMapper
           .map(listPersonsForAddressPersonsStation, listType);
       String station = firestationService.getFirestation(address).getStation();
-      AddressPersonsStationDto addressPersonsStation = new AddressPersonsStationDto(
+      return new AddressPersonsStationDto(
           listPersonsByStationDto,
           station);
-      return addressPersonsStation;
     } else {
       return null;
     }
