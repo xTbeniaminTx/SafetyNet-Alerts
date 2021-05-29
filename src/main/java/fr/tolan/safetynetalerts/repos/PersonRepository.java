@@ -16,6 +16,9 @@ public interface PersonRepository extends CrudRepository<Person, Integer> {
 
   List<Person> findByAddress(String address);
 
+  List<Person> findByCity(String city);
+
+
 
 
 

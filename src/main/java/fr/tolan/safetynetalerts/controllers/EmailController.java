@@ -13,34 +13,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 
  * Controller for Email list by city
- * 
- * @author tolan
  *
+ * @author tolan
  */
 @RestController
 public class EmailController {
 
-	private final Logger logger = LoggerFactory.getLogger(StationPersonsController.class);
+  private final Logger logger = LoggerFactory.getLogger(StationPersonsController.class);
 
-	@Autowired
-	private EmailService emailService;
+  @Autowired
+  private EmailService emailService;
 
-	/**
-	 * 
-	 * Read - Get list of emails by city
-	 * 
-	 * @param city
-	 * @return Set of emails
-	 */
-	@RequestMapping(value = "/communityEmail", params = { "city" }, method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<Set<String>> getPhoneAlert(@RequestParam("city") final String city) {
-		logger.info("Request : GET http://localhost:8080/communityEmail?city={}", city);
-		Set<String> phonesByStation = emailService.getEmailsByCity(city);
-		logger.info("Return : Body :{}", phonesByStation);
-		return ResponseEntity.ok().body(phonesByStation);
-	}
+  /**
+   * Read - Get list of emails by city
+   *
+   * @param city
+   * @return Set of emails
+   */
+  @RequestMapping(value = "/communityEmail", params = {"city"}, method = RequestMethod.GET)
+  @ResponseBody
+  public ResponseEntity<Set<String>> getEmailAlert(@RequestParam("city") final String city) {
+    logger.info("Request : GET http://localhost:8080/communityEmail?city={}", city);
+    Set<String> emailsByCity = emailService.getEmailsByCity(city);
+    logger.info("Return : Body :{}", emailsByCity);
+    return ResponseEntity.ok().body(emailsByCity);
+  }
 
 }

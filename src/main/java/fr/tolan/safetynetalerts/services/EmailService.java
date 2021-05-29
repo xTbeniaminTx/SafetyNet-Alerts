@@ -1,28 +1,30 @@
 package fr.tolan.safetynetalerts.services;
 
-import java.util.HashSet;
+import fr.tolan.safetynetalerts.models.Person;
+import fr.tolan.safetynetalerts.repos.PersonRepository;
+import java.util.List;
 import java.util.Set;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
 
-	@PersistenceContext
-	private EntityManager em;
+  @Autowired
+  PersonRepository personRepository;
 
-	public Set<String> getEmailsByCity(String city) {
+  public Set<String> getEmailsByCity(String city) {
 
-		TypedQuery<String> query = em.createQuery("SELECT p.email FROM Person p WHERE p.city = ?1", String.class);
-		Set<String> listEmailByCity = new HashSet<String>(query.setParameter(1, city).getResultList());
-		if (!listEmailByCity.isEmpty()) {
-			return listEmailByCity;
-
-		} else {
-			return null;
-		}
-	}
+    List<Person> personByCity = personRepository.findByCity(city);
+    System.out.println(personByCity);
+    Set<String> listEmailByCity = personByCity.stream().map(Person::getEmail)
+        .collect(Collectors.toSet());
+    if (!listEmailByCity.isEmpty()) {
+      return listEmailByCity;
+    } else {
+      return null;
+    }
+  }
 
 }
