@@ -42,7 +42,6 @@ public class ChildAlertService {
 
       LocalDate birthdate = medicalrecordRepository.findByFirstNameAndLastName(firstName, lastName)
           .getBirthdate();
-      System.out.println(birthdate);
       Integer age = ageFromBirthdate.ageFromBirthdate(birthdate);
 
       if (age < 18) {
@@ -54,11 +53,13 @@ public class ChildAlertService {
       }
     }
     if (!listChildDto.isEmpty()) {
+
       return new ChildAlertDto(listChildDto, childHouseholdDto);
+
     } else {
+
       return null;
+
     }
-
   }
-
 }

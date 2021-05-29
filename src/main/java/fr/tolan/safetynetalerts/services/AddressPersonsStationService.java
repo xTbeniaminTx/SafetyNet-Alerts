@@ -29,12 +29,13 @@ public class AddressPersonsStationService {
       List<PersonForAddressPersonsStationDto> listPersonsByStationDto = modelMapper
           .map(listPersonsForAddressPersonsStation, listType);
       String station = firestationService.getFirestation(address).getStation();
-      return new AddressPersonsStationDto(
-          listPersonsByStationDto,
-          station);
+
+      return new AddressPersonsStationDto(listPersonsByStationDto, station);
+
     } else {
+
       return null;
+
     }
   }
-
 }

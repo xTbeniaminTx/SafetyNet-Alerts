@@ -25,7 +25,7 @@ public class StationPersonsService {
 
       List<PersonMedicalrecordDto> listPersonsByStation = personMedicalrecordDtoService
           .getPersonsMedicalrecordByAddresses(addresses);
-      List<PersonByStationDto> listPersonsByStationDto = new ArrayList<PersonByStationDto>();
+      List<PersonByStationDto> listPersonsByStationDto = new ArrayList<>();
       int children = 0;
       int adults = 0;
       for (PersonMedicalrecordDto personMedByStation : listPersonsByStation) {
@@ -39,10 +39,13 @@ public class StationPersonsService {
           adults++;
         }
       }
-      return new StationPersonsDto(listPersonsByStationDto, children,
-          adults);
+
+      return new StationPersonsDto(listPersonsByStationDto, children, adults);
+
     } else {
+
       return null;
+
     }
 
   }

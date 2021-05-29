@@ -17,8 +17,7 @@ public class PersonInfoService {
         .getPersonMedicalrecordDto(firstName, lastName);
     if (personMedicalrecordDto != null) {
       ModelMapper modelMapper = new ModelMapper();
-      PersonInfoDto personInfoDto = modelMapper.map(personMedicalrecordDto, PersonInfoDto.class);
-      return personInfoDto;
+      return modelMapper.map(personMedicalrecordDto, PersonInfoDto.class);
     } else {
       return null;
     }

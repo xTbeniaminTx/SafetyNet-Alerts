@@ -3,12 +3,10 @@ package fr.tolan.safetynetalerts.services;
 import fr.tolan.safetynetalerts.dtos.PersonMedicalrecordDto;
 import fr.tolan.safetynetalerts.models.Medicalrecord;
 import fr.tolan.safetynetalerts.models.Person;
+import fr.tolan.safetynetalerts.repos.PersonRepository;
 import fr.tolan.safetynetalerts.utils.AgeFromBirthdate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonMedicalrecordService {
 
-  @PersistenceContext
-  private EntityManager em;
+  @Autowired
+  PersonRepository personRepository;
 
   @Autowired
   PersonService personService;
@@ -43,9 +41,13 @@ public class PersonMedicalrecordService {
       modelMapper.map(medicalrecord, personMedDto);
       Integer age = ageFromBirthdate.ageFromBirthdate(personMedDto.getBirthdate());
       personMedDto.setAge(age);
+
       return personMedDto;
+
     } else {
+
       return null;
+
     }
   }
 
@@ -55,9 +57,9 @@ public class PersonMedicalrecordService {
    * @return Persons and Medicalrecords Infos
    */
   public PersonMedicalrecordDto personToPersonMedDto(Person person) {
-    PersonMedicalrecordDto personMedDto = getPersonMedicalrecordDto(person.getFirstName(),
-        person.getLastName());
-    return personMedDto;
+
+    return getPersonMedicalrecordDto(person.getFirstName(), person.getLastName());
+
   }
 
   /**
@@ -66,14 +68,14 @@ public class PersonMedicalrecordService {
    * @return Persons and Medicalrecords Infos
    */
   public List<PersonMedicalrecordDto> getPersonsMedicalrecordByAddress(String address) {
-    TypedQuery<Person> query = em
-        .createQuery("SELECT p FROM Person p WHERE p.address = ?1", Person.class);
-    List<Person> listPersonsByAddress = query.setParameter(1, address).getResultList();
-    List<PersonMedicalrecordDto> listPersonsMedicalByAddress = new ArrayList<PersonMedicalrecordDto>();
+    List<Person> listPersonsByAddress = personRepository.findByAddress(address);
+    List<PersonMedicalrecordDto> listPersonsMedicalByAddress = new ArrayList<>();
     for (Person person : listPersonsByAddress) {
       listPersonsMedicalByAddress.add(personToPersonMedDto(person));
     }
+
     return listPersonsMedicalByAddress;
+
   }
 
   /**
@@ -82,15 +84,13 @@ public class PersonMedicalrecordService {
    * @return Persons and Medicalrecords Infos
    */
   public List<PersonMedicalrecordDto> getPersonsMedicalrecordByAddresses(List<String> addresses) {
-    TypedQuery<Person> query = em
-        .createQuery("SELECT p FROM Person p WHERE p.address IN :addresses", Person.class);
-    List<Person> listPersonsByAddresses = query.setParameter("addresses", addresses)
-        .getResultList();
-    List<PersonMedicalrecordDto> listPersonsMedicalByAddresses = new ArrayList<PersonMedicalrecordDto>();
+    List<Person> listPersonsByAddresses = personRepository.findAllByAddressIn(addresses);
+    List<PersonMedicalrecordDto> listPersonsMedicalByAddresses = new ArrayList<>();
     for (Person person : listPersonsByAddresses) {
       listPersonsMedicalByAddresses.add(personToPersonMedDto(person));
     }
-    return listPersonsMedicalByAddresses;
-  }
 
+    return listPersonsMedicalByAddresses;
+
+  }
 }
