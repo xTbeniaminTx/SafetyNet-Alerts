@@ -3,6 +3,7 @@ package fr.tolan.safetynetalerts.controllers;
 import fr.tolan.safetynetalerts.models.Firestation;
 import fr.tolan.safetynetalerts.services.FirestationService;
 import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,7 @@ public class FirestationController {
    * @return The firestation object saved
    */
   @PostMapping("/firestation")
-  @Validated
-  public ResponseEntity<Object> createFirestation(@RequestBody Firestation firestation) {
+  public ResponseEntity<Object> createFirestation(@Valid @RequestBody Firestation firestation) {
     logger.info("Create request : POST http://localhost:8080/firestation/ - Body :{}", firestation);
     try {
       Firestation savedFirestation = firestationService.saveFirestation(firestation);

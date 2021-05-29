@@ -19,7 +19,7 @@ public class Firestation {
   private String station;
 
   @Id
-  @NotEmpty(message = "Adress must not be empty")
+  @NotEmpty(message = "Address must not be empty")
   private String address;
 
 }

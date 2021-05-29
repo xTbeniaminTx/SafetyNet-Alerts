@@ -4,6 +4,7 @@ import fr.tolan.safetynetalerts.models.Medicalrecord;
 import fr.tolan.safetynetalerts.services.MedicalrecordService;
 import java.time.LocalDate;
 import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,7 @@ public class MedicalrecordController {
    * @return The medicalrecord object saved
    */
   @PostMapping("/medicalrecord")
-  @Validated
-  public ResponseEntity<Object> createMedicalrecord(@RequestBody Medicalrecord medicalrecord) {
+  public ResponseEntity<Object> createMedicalrecord(@Valid @RequestBody Medicalrecord medicalrecord) {
     logger.info("Create request : POST http://localhost:8080/medicalrecord/ - Body :{}",
         medicalrecord);
     try {
