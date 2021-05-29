@@ -1,5 +1,6 @@
 package fr.tolan.safetynetalerts.controllers;
 
+import fr.tolan.safetynetalerts.exceptions.PersonNotFoundException;
 import fr.tolan.safetynetalerts.models.Person;
 import fr.tolan.safetynetalerts.services.PersonService;
 import java.net.URI;
@@ -62,6 +63,13 @@ public class PersonController {
       @PathVariable("lastName") final String lastName) {
 
     Person person = personService.getPerson(firstName, lastName);
+
+    if (person == null) {
+      logger.warn("The person is not found in DB !!!");
+      throw new PersonNotFoundException(
+          "The person with firstName: " + firstName + " and lastName: " + lastName
+              + "is not found in DB");
+    }
 
     logger.info("Get request : Get http://localhost:8080/person/{} {} - Body : {}", firstName,
         lastName, person);
