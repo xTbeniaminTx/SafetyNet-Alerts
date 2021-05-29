@@ -48,7 +48,7 @@ public class PersonTest {
   public void createPersonTest() throws Exception {
     mockMvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON).content(
         "{ \"firstName\":\"CreatedFirstName\", \"lastName\":\"CreatedLastName\", \"address\":\"1509 Culver St\", \"city\":\"Culver\", \"zip\":\"97451\", \"phone\":\"841-874-6512\", \"email\":\"jaboyd@email.com\" }")
-        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
         .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").exists());
   }
 
@@ -78,8 +78,7 @@ public class PersonTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(
             "{ \"address\":\"UpdatedAddress\", \"city\":\"Culver\", \"zip\":\"97451\", \"phone\":\"841-874-6512\", \"email\":\"jaboyd@email.com\" }")
-        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound())
-        .andExpect(MockMvcResultMatchers.jsonPath("$").doesNotExist());
+        .accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
   }
 
   @Test

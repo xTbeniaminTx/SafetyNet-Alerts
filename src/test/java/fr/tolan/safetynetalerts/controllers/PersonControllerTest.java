@@ -25,10 +25,10 @@ public class PersonControllerTest {
   private PersonService personService;
 
   @Test
-  public void createPersonTest() throws Exception {
+  public void createPersonTestError() throws Exception {
     mockMvc.perform(post("/person").contentType(MediaType.APPLICATION_JSON).content(
-        "{ \"firstName\":\"CreatedFirstName\", \"lastName\":\"CreatedLastName\", \"address\":\"1509 Culver St\", \"city\":\"Culver\", \"zip\":\"97451\", \"phone\":\"841-874-6512\", \"email\":\"jaboyd@email.com\" }"))
-        .andExpect(status().isOk());
+        "{ \"lastName\":\"CreatedLastName\", \"address\":\"1509 Culver St\", \"city\":\"Culver\", \"zip\":\"97451\", \"phone\":\"841-874-6512\", \"email\":\"jaboyd@email.com\" }"))
+        .andExpect(status().isBadRequest());
   }
 
   @Test
