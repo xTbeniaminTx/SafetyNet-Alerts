@@ -21,10 +21,10 @@ public interface PersonRepository extends CrudRepository<Person, Integer> {
 
   List<Person> findByCity(String city);
 
+  List<Person> findAllByAddressIn(List<String> addresses);
+
   @Query(value = "SELECT * FROM persons WHERE persons.address IN :addresses", nativeQuery = true)
   List<Person> findAllPersonsByAddresses(@Param("addresses") List<String> addresses);
-
-  List<Person> findAllByAddressIn(List<String> addresses);
 
   @Query(value = "SELECT persons.phone FROM persons WHERE persons.address IN :addresses", nativeQuery = true)
   Set<String> findAllPhonesByAddresses(@Param("addresses") List<String> addresses);

@@ -32,7 +32,7 @@ public class Person {
   @NotEmpty(message = "Last name must not be empty")
   private String lastName;
 
-  @NotEmpty(message = "Adress must not be empty")
+  @NotEmpty(message = "Address must not be empty")
   private String address;
 
   @NotEmpty(message = "City name must not be empty")

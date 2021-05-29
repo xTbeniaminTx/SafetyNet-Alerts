@@ -2,12 +2,12 @@ package fr.tolan.safetynetalerts.controllers;
 
 import fr.tolan.safetynetalerts.models.Person;
 import fr.tolan.safetynetalerts.services.PersonService;
-import javax.validation.ConstraintViolationException;
+import java.net.URI;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 public class PersonController {
@@ -31,18 +32,15 @@ public class PersonController {
    * @return The person object saved
    */
   @PostMapping("/person")
-  @Validated
-  public ResponseEntity<Object> createPerson(@RequestBody Person person) {
+  public ResponseEntity<Object> createPerson(@Valid @RequestBody Person person) {
     logger.info("Create request : POST http://localhost:8080/person/ - Body :{}", person);
-    try {
-      Person savedPerson = personService.savePerson(person);
-      logger.info("Return : Body :{}", savedPerson);
-      return ResponseEntity.ok().body(savedPerson);
-    } catch (ConstraintViolationException e) {
-      logger.error(e.toString());
-      return ResponseEntity.badRequest().body("All person's fields must be informed");
-    }
+    Person savedPerson = personService.savePerson(person);
+    logger.info("Return : Body :{}", savedPerson);
+    URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{firstName} {lastName}")
+        .buildAndExpand(savedPerson.getFirstName(), savedPerson.getLastName()).toUri();
+    return ResponseEntity.created(location).body(savedPerson);
   }
+
 
   /**
    * Read - Get all persons
@@ -55,14 +53,32 @@ public class PersonController {
   }
 
   /**
+   * Read - Get one person
+   *
+   * @return - Person
+   */
+  @GetMapping("/person/{firstName} {lastName}")
+  public Person getPerson(@PathVariable("firstName") final String firstName,
+      @PathVariable("lastName") final String lastName) {
+
+    Person person = personService.getPerson(firstName, lastName);
+
+    logger.info("Get request : Get http://localhost:8080/person/{} {} - Body : {}", firstName,
+        lastName, person);
+
+    return person;
+  }
+
+  /**
    * * Update - Update an existing person
    *
-   * @param person    - The person object to update
+   * @param person - The person object to update
    * @return The person object updated
    */
   @PutMapping("/person/{firstName} {lastName}")
   public ResponseEntity<Person> updatePerson(@PathVariable("firstName") final String firstName,
-      @PathVariable("lastName") final String lastName, @RequestBody Person person) {
+      @PathVariable("lastName") final String lastName, @RequestBody Person person)
+      throws Exception {
 
     logger.info("Update request : PUT http://localhost:8080/person/{} {} - Body : {}", firstName,
         lastName, person);
