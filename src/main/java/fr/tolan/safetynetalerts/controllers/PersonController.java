@@ -67,8 +67,7 @@ public class PersonController {
     if (person == null) {
       logger.warn("The person is not found in DB !!!");
       throw new PersonNotFoundException(
-          "The person with firstName: " + firstName + " and lastName: " + lastName
-              + "is not found in DB");
+          "fistName: " + firstName + " lastName: " + lastName + " not FOUND");
     }
 
     logger.info("Get request : Get http://localhost:8080/person/{} {} - Body : {}", firstName,
@@ -138,14 +137,15 @@ public class PersonController {
     logger.info("Delete request : DELETE http://localhost:8080/person/{} {}", firstName, lastName);
 
     Person personInDB = personService.getPerson(firstName, lastName);
-    if (personInDB != null) {
-      personService.deletePerson(firstName, lastName);
-      logger.info("Person {} {} deleted", firstName, lastName);
-      return ResponseEntity.ok().body(personInDB);
-    } else {
+    if (personInDB == null) {
       logger.error("Person {} {} not found in DB", firstName, lastName);
-      return ResponseEntity.notFound().build();
+      throw new PersonNotFoundException(
+          "fistName: " + firstName + " lastName: " + lastName + " not FOUND");
     }
+
+    personService.deletePerson(firstName, lastName);
+    logger.info("Person {} {} deleted", firstName, lastName);
+    return ResponseEntity.ok().body(personInDB);
   }
 
 }
